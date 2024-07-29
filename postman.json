@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "4c10b0d9-83eb-421f-be85-3644564302a0",
+		"name": "ThreeStars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37283934"
+	},
+	"item": [
+		{
+			"name": "Create Player",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uniqueId\": \"a84e50da-5e7c-490d-96f7-db791d2a9116\",\r\n    \"name\": \"reluije\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/players",
+					"host": [
+						"45",
+						"13",
+						"119",
+						"208"
+					],
+					"port": "9000",
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Existing Player",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/players/a84e50da-5e7c-490d-96f7-db791d2a9116",
+					"host": [
+						"45",
+						"13",
+						"119",
+						"208"
+					],
+					"port": "9000",
+					"path": [
+						"players",
+						"a84e50da-5e7c-490d-96f7-db791d2a9116"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Non Existing Player",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/players/a84e50da-5e7c-490d-96f7-db791d2a9117",
+					"host": [
+						"45",
+						"13",
+						"119",
+						"208"
+					],
+					"port": "9000",
+					"path": [
+						"players",
+						"a84e50da-5e7c-490d-96f7-db791d2a9117"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unauthorized",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/players/a84e50da-5e7c-490d-96f7-db791d2a9116",
+					"host": [
+						"45",
+						"13",
+						"119",
+						"208"
+					],
+					"port": "9000",
+					"path": [
+						"players",
+						"a84e50da-5e7c-490d-96f7-db791d2a9116"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
