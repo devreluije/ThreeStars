@@ -89,21 +89,16 @@ public class WebAccess {
 
     private CompletableFuture<PlayerProfileDTO> execute(String endpoint, Consumer<HttpRequest.Builder> builderConsumer) {
         if (!loaded) return CompletableFuture.failedFuture(new IllegalStateException("Web access are not loaded"));
-        CompletableFuture<PlayerProfileDTO> future = new CompletableFuture<>();
         HttpRequest.Builder builder = HttpRequest.newBuilder().uri(URI.create(url + endpoint));
 
         builderConsumer.accept(builder);
-        client.sendAsync(builder.build(), HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
-                .whenComplete((response, error) -> {
-                    if (error != null) future.completeExceptionally(error);
-                    else {
-                        error = checkError(response.statusCode());
+        return client.sendAsync(builder.build(), HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+                .thenCompose(response -> {
+                    Throwable error = checkError(response.statusCode());
 
-                        if (error == null) future.complete(GSON.fromJson(response.body(), PlayerProfileDTO.class));
-                        else future.completeExceptionally(error);
-                    }
+                    if (error != null) return CompletableFuture.failedFuture(error);
+                    return CompletableFuture.completedFuture(GSON.fromJson(response.body(), PlayerProfileDTO.class));
                 });
-        return future;
     }
 
     private Throwable checkError(int statusCode) {
