@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.logging.Level;
 
 public class PlayerCommand implements TabExecutor {
 
@@ -34,7 +33,7 @@ public class PlayerCommand implements TabExecutor {
         }
         plugin.getWebAccess().getProfileByUniqueId(player.getUniqueId()).whenComplete((profile, error) -> {
             if (error != null) {
-                plugin.getLogger().log(Level.WARNING, Messages.FAIL_TO_LOAD.formatted(player.getName()), error);
+                plugin.logError(Messages.FAIL_TO_LOAD.formatted(player.getName()), error);
                 sender.sendMessage(Messages.SHOW_FAIL_TO_LOAD.formatted(player.getName()));
                 return;
             }

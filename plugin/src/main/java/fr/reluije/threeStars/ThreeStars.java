@@ -33,6 +33,11 @@ public class ThreeStars extends JavaPlugin {
         return webAccess;
     }
 
+    public void logError(String message, Throwable error) {
+        if (webAccess.isDebug())
+            getLogger().log(Level.WARNING, message, error);
+    }
+
     @SuppressWarnings("SameParameterValue")
     private void registerCommand(String command, TabExecutor executor) {
         PluginCommand pluginCommand = getCommand(command);

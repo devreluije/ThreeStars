@@ -24,7 +24,7 @@ public class PlayerListener implements Listener {
 
         plugin.getWebAccess().getProfileByUniqueId(player.getUniqueId()).whenComplete((profile, error) -> {
             if (error != null) {
-                plugin.getLogger().log(Level.WARNING, Messages.FAIL_TO_LOAD.formatted(player.getName()), error);
+                plugin.logError(Messages.FAIL_TO_LOAD.formatted(player.getName()), error);
                 return;
             }
             if (profile == null) createProfile(player);
@@ -37,10 +37,11 @@ public class PlayerListener implements Listener {
 
         plugin.getWebAccess().createProfile(profile).whenComplete((result, error) -> {
             if (error != null) {
-                plugin.getLogger().log(Level.WARNING, Messages.FAIL_TO_CREATE.formatted(player.getName()), error);
+                plugin.logError(Messages.FAIL_TO_CREATE.formatted(player.getName()), error);
                 return;
             }
-            plugin.getLogger().log(Level.INFO, "Profile created " + result);
+            if (plugin.getWebAccess().isDebug())
+                plugin.getLogger().log(Level.INFO, "Profile created " + result);
         });
     }
 }

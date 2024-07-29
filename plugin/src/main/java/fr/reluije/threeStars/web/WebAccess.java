@@ -9,7 +9,7 @@ import fr.reluije.threeStars.exceptions.ServerError;
 import fr.reluije.threeStars.utils.EnumUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
-import java.net.URI;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpClient.Redirect;
 import java.net.http.HttpClient.Version;
@@ -31,6 +31,8 @@ public class WebAccess {
     private HttpClient client;
     private String url;
 
+    private boolean debug;
+
     public void load(ConfigurationSection section) {
         int threadPoolSize = section.getInt("thread-pool.size", 4);
         String threadPoolNameFormat = section.getString("thread-pool.name-format", "WebAccess Pool - %d");
@@ -38,6 +40,7 @@ public class WebAccess {
         String redirectPolicy = section.getString("client.redirect-policy", "NEVER").toUpperCase();
         String version = section.getString("client.version", "HTTP_1_1").toUpperCase();
 
+        debug = section.getBoolean("debug", true);
         url = section.getString("url");
         if (url == null) throw new IllegalArgumentException("URL is null");
 
@@ -56,6 +59,10 @@ public class WebAccess {
                 })
                 .executor(executor).build();
         loaded = true;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
 
     public CompletableFuture<PlayerProfileDTO> createProfile(PlayerProfileDTO playerProfileDTO) {
