@@ -12,11 +12,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.logging.Level;
 
-public class ShowCommand implements TabExecutor {
+public class PlayerCommand implements TabExecutor {
 
     private final ThreeStars plugin;
 
-    public ShowCommand(ThreeStars plugin) {
+    public PlayerCommand(ThreeStars plugin) {
         this.plugin = plugin;
     }
 

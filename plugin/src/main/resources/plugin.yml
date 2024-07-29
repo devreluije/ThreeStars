@@ -4,6 +4,6 @@ main: fr.reluije.threeStars.ThreeStars
 api-version: '1.19'
 
 commands:
-  show:
-    usage: /<command>
+  player:
+    usage: /<command> <player>
     description: Show player information

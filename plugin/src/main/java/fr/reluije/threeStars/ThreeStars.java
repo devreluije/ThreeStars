@@ -1,6 +1,6 @@
 package fr.reluije.threeStars;
 
-import fr.reluije.threeStars.commands.ShowCommand;
+import fr.reluije.threeStars.commands.PlayerCommand;
 import fr.reluije.threeStars.listeners.PlayerListener;
 import fr.reluije.threeStars.web.WebAccess;
 import org.bukkit.command.PluginCommand;
@@ -21,7 +21,7 @@ public class ThreeStars extends JavaPlugin {
         webAccess.load(getConfig());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        registerCommand("show", new ShowCommand(this));
+        registerCommand("player", new PlayerCommand(this));
     }
 
     @Override
