@@ -19,7 +19,7 @@ public class PlayerProfileController {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public PlayerProfileDTO create(@RequestBody PlayerProfileDTO playerProfileDTO) {
         PlayerProfile entity = service.convertToEntity(playerProfileDTO);
         PlayerProfile result = service.createProfile(entity);
