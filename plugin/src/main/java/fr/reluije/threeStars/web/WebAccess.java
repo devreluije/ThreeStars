@@ -48,6 +48,12 @@ public class WebAccess {
         client = HttpClient.newBuilder()
                 .followRedirects(EnumUtils.get(Redirect.class, redirectPolicy, Redirect.NEVER))
                 .version(EnumUtils.get(Version.class, version, Version.HTTP_1_1))
+                .authenticator(new Authenticator() {
+                    @Override
+                    public PasswordAuthentication requestPasswordAuthenticationInstance(String host, InetAddress address, int port, String protocol, String prompt, String scheme, URL url, RequestorType reqType) {
+                        return new PasswordAuthentication("admin", "admin".toCharArray());
+                    }
+                })
                 .executor(executor).build();
         loaded = true;
     }

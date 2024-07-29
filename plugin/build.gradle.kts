@@ -1,5 +1,6 @@
 plugins {
     java
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
@@ -11,8 +12,12 @@ repositories {
 dependencies {
     implementation(project(":common"))
 
-    implementation("org.jetbrains:annotations:24.1.0")
+    compileOnly("org.jetbrains:annotations:24.1.0")
     compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
+}
+
+tasks.compileJava {
+    options.encoding = "UTF-8"
 }
 
 val targetJavaVersion = 17
@@ -35,3 +40,6 @@ tasks.processResources {
     }
 }
 
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}

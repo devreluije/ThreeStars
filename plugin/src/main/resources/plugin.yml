@@ -1,4 +1,4 @@
-name: Test
+name: ThreeStars
 version: '${version}'
 main: fr.reluije.threeStars.ThreeStars
 api-version: '1.19'
