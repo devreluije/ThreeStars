@@ -1,0 +1,9 @@
+url: 'http://localhost:8080'
+
+thread-pool:
+  size: 4
+  name-format: 'WebAccess Pool - %d'
+
+client:
+  redirect-policy: ALWAYS
+  version: HTTP_1_1

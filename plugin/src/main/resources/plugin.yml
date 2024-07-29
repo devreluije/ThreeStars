@@ -1,0 +1,9 @@
+name: Test
+version: '${version}'
+main: fr.reluije.threeStars.ThreeStars
+api-version: '1.19'
+
+commands:
+  show:
+    usage: /<command>
+    description: Show player information
