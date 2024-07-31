@@ -1,0 +1,31 @@
+services:
+  spring:
+    build: spring
+    environment:
+      PORT: 9000
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: spring_db
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: secret
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "9000:9000"
+    expose:
+      - 9000
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: spring_db
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1
+      start_period: 1s
+      interval: 1s
+      timeout: 5s
+      retries: 10
