@@ -1,6 +1,7 @@
 package fr.reluije.threeStars.profiles;
 
 import fr.reluije.threeStars.dto.PlayerProfileDTO;
+import fr.reluije.threeStars.exceptions.NotFoundException;
 import fr.reluije.threeStars.services.PlayerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class PlayerProfileController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerProfileDTO> get(@PathVariable("id") UUID uniqueId) {
-        return ResponseEntity.of(service.findByUniqueId(uniqueId).map(service::convertToDto));
+        return service.findByUniqueId(uniqueId).map(service::convertToDto).map(ResponseEntity::ok).orElseThrow(
+                () -> new NotFoundException("Profile %s not found".formatted(uniqueId.toString())));
     }
 }
